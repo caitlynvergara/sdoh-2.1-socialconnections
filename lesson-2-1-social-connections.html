@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Social Connection and Health</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Merriweather:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --navy: #002045;
+                --navy-deep: #102a43;
+                --gold: #ffb800;
+                --gold-soft: #fff8e1;
+                --gold-medium: #fff3c4;
+                --amber: #a66a15;
+                --clean-blue: #ebf8ff;
+                --surface: #f7fafc;
+                --surface-white: #ffffff;
+                --border: #e2e8f0;
+                --text: #181c1e;
+                --text-muted: #43474e;
+
+                --cardio: #b91c1c;
+                --cardio-bg: #fee2e2;
+                --neuro: #6b21a8;
+                --neuro-bg: #f3e8ff;
+                --mental: #1d4ed8;
+                --mental-bg: #dbeafe;
+                --cognitive: #047857;
+                --cognitive-bg: #d1fae5;
+                --mortality: #475569;
+                --mortality-bg: #e2e8f0;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Merriweather", Georgia, serif;
+                background: var(--surface);
+                color: var(--text);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .wrap {
+                max-width: 1080px;
+                margin: 0 auto;
+                padding: 20px 20px 8px;
+            }
+
+            .hero {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .stat {
+                font-family: "Lato", sans-serif;
+                font-weight: 900;
+                color: var(--amber);
+                line-height: 1;
+                letter-spacing: -0.02em;
+                font-size: clamp(56px, 11vw, 92px);
+                margin-bottom: 14px;
+                display: inline-flex;
+                align-items: baseline;
+                gap: 4px;
+            }
+
+            .stat .num {
+                display: inline-block;
+                min-width: 1.4ch;
+                text-align: center;
+            }
+
+            .stat .dash {
+                font-weight: 700;
+                font-size: 0.85em;
+                margin: 0 4px;
+                color: var(--amber);
+                position: relative;
+                top: -0.08em;
+            }
+
+            .stat .pct {
+                font-size: 0.7em;
+                font-weight: 900;
+                margin-left: 4px;
+            }
+
+            .hero-caption {
+                font-family: "Merriweather", Georgia, serif;
+                font-size: 16px;
+                color: var(--text);
+                margin: 0 auto 8px;
+                max-width: 540px;
+                line-height: 1.55;
+            }
+
+            .source {
+                font-family: "Lato", sans-serif;
+                font-size: 12px;
+                font-weight: 400;
+                margin: 0;
+                color: var(--text-muted);
+                letter-spacing: 0.02em;
+            }
+
+            .source a {
+                color: var(--text-muted);
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            }
+
+            .source a:hover,
+            .source a:focus {
+                color: var(--navy);
+            }
+
+            .bridge {
+                font-family: "Lato", sans-serif;
+                font-size: 14px;
+                font-weight: 700;
+                color: var(--navy);
+                margin: 0 0 14px;
+                text-align: center;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+            }
+
+            .risks-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .risk-card {
+                border-radius: 12px;
+                padding: 16px 8px 14px;
+                text-align: center;
+                background: var(--surface-white);
+                border: 1px solid var(--border);
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            .risk-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(26, 54, 93, 0.08);
+            }
+
+            .risk-icon {
+                width: 46px;
+                height: 46px;
+                margin: 0 auto 10px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .risk-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .risk-label {
+                font-family: "Lato", sans-serif;
+                font-size: 13px;
+                font-weight: 900;
+                margin: 0 0 2px;
+                color: var(--navy);
+                line-height: 1.25;
+            }
+
+            .risk-system {
+                font-family: "Merriweather", Georgia, serif;
+                font-size: 11px;
+                font-style: italic;
+                color: var(--text-muted);
+                line-height: 1.3;
+                margin: 0;
+            }
+
+            .risk-card.cardio .risk-icon {
+                background: var(--cardio-bg);
+                color: var(--cardio);
+            }
+            .risk-card.neuro .risk-icon {
+                background: var(--neuro-bg);
+                color: var(--neuro);
+            }
+            .risk-card.mental .risk-icon {
+                background: var(--mental-bg);
+                color: var(--mental);
+            }
+            .risk-card.cognitive .risk-icon {
+                background: var(--cognitive-bg);
+                color: var(--cognitive);
+            }
+            .risk-card.mortality .risk-icon {
+                background: var(--mortality-bg);
+                color: var(--mortality);
+            }
+
+            .footer-card {
+                background: linear-gradient(
+                    135deg,
+                    var(--gold-soft) 0%,
+                    var(--gold-medium) 100%
+                );
+                border-left: 4px solid var(--gold);
+                border-radius: 12px;
+                padding: 16px 22px;
+                margin: 0;
+                text-align: left;
+            }
+
+            .footer-card p {
+                font-family: "Merriweather", Georgia, serif;
+                font-size: 16px;
+                line-height: 1.55;
+                margin: 0;
+                color: var(--text);
+            }
+
+            .footer-card strong {
+                font-weight: 700;
+                color: var(--navy);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    transition-duration: 0.01ms !important;
+                }
+            }
+
+            @media (max-width: 520px) {
+                .wrap {
+                    padding: 16px 16px 8px;
+                }
+                .stat {
+                    font-size: clamp(48px, 14vw, 70px);
+                }
+                .risks-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .risk-card:nth-child(5) {
+                    grid-column: 1 / -1;
+                    max-width: 50%;
+                    margin: 0 auto;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <section class="hero">
+                <div
+                    class="stat"
+                    aria-label="Loneliness and isolation increase the risk of early death by 26 to 29 percent."
+                >
+                    <span class="num" id="num1">0</span
+                    ><span class="dash">to</span
+                    ><span class="num" id="num2">0</span
+                    ><span class="pct">%</span>
+                </div>
+                <p class="hero-caption">
+                    Loneliness and isolation increase the risk of early death by
+                    26 to 29 percent.
+                </p>
+                <p class="source">
+                    <a
+                        href="https://hsph.harvard.edu/news/the-importance-of-connections-ways-to-live-a-longer-healthier-life/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Source: Harvard T.H. Chan School of Public Health</a
+                    >
+                </p>
+            </section>
+
+            <p class="bridge">
+                Without strong social connections, people face higher risks for:
+            </p>
+
+            <div class="risks-grid">
+                <div class="risk-card cardio">
+                    <div class="risk-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                            />
+                        </svg>
+                    </div>
+                    <p class="risk-label">Heart Disease</p>
+                    <p class="risk-system">Cardiovascular</p>
+                </div>
+
+                <div class="risk-card neuro">
+                    <div class="risk-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polygon
+                                points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                            />
+                        </svg>
+                    </div>
+                    <p class="risk-label">Stroke</p>
+                    <p class="risk-system">Neurological</p>
+                </div>
+
+                <div class="risk-card mental">
+                    <div class="risk-icon" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M20 16.2A4.5 4.5 0 0 0 17.5 8h-1.8A7 7 0 1 0 4 14.9"
+                            />
+                            <line x1="8" y1="19" x2="8" y2="21" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="16" y1="19" x2="16" y2="21" />
+                        </svg>
+                    </div>
+                    <p class="risk-label">Depression</p>
+                    <p class="risk-system">Mental Health</p>
+                </div>
+
+                <div class="risk-card cognitive">
+                    <div class="risk-icon" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"
+                            />
+                            <path
+                                d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"
+                            />
+                        </svg>
+                    </div>
+                    <p class="risk-label">Dementia</p>
+                    <p class="risk-system">Cognitive</p>
+                </div>
+
+                <div class="risk-card mortality">
+                    <div class="risk-icon" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 22h14" />
+                            <path d="M5 2h14" />
+                            <path
+                                d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"
+                            />
+                            <path
+                                d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"
+                            />
+                        </svg>
+                    </div>
+                    <p class="risk-label">Early Death</p>
+                    <p class="risk-system">Mortality</p>
+                </div>
+            </div>
+
+            <aside class="footer-card" role="note">
+                <p>
+                    <strong
+                        >Strong social connections don't just feel good.</strong
+                    >
+                    They are proven to be good for you.
+                </p>
+            </aside>
+        </div>
+
+        <script>
+            (function () {
+                const num1 = document.getElementById("num1");
+                const num2 = document.getElementById("num2");
+                const stat = document.querySelector(".stat");
+                const reduced = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)",
+                ).matches;
+
+                function animate(el, target, duration) {
+                    const startTime = performance.now();
+                    function step(now) {
+                        const elapsed = now - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        el.textContent = Math.round(eased * target);
+                        if (progress < 1) {
+                            requestAnimationFrame(step);
+                        } else {
+                            el.textContent = target;
+                        }
+                    }
+                    requestAnimationFrame(step);
+                }
+
+                if (reduced) {
+                    num1.textContent = 26;
+                    num2.textContent = 29;
+                    return;
+                }
+
+                const observer = new IntersectionObserver(
+                    function (entries) {
+                        entries.forEach(function (entry) {
+                            if (
+                                entry.isIntersecting &&
+                                !entry.target.dataset.animated
+                            ) {
+                                entry.target.dataset.animated = "true";
+                                setTimeout(function () {
+                                    animate(num1, 26, 1600);
+                                    animate(num2, 29, 1700);
+                                }, 200);
+                            }
+                        });
+                    },
+                    { threshold: 0.3 },
+                );
+
+                observer.observe(stat);
+            })();
+        </script>
+    </body>
+</html>
